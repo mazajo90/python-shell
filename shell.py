@@ -28,6 +28,8 @@ class AllThreading(object):
 
 def sig_handler(sig, frame):
     print("\n\n[!]Saliendo..")
+    Cmd(erasein)
+    Cmd(eraseou)
     sys.exit(0)
 
 signal.signal(signal.SIGINT, sig_handler)
@@ -74,6 +76,8 @@ global stdin, stdout
 session = randrange(1000, 9999)
 stdin   = "/dev/shm/input.%s" % session
 stdout  = "/dev/shm/output.%s" % session
+erasein = """/bin/rm %s""" % (stdin)
+eraseou = """/bin/rm %s""" % (stdout)
 
 SetupShell()
 ReadingAll = AllThreading()
